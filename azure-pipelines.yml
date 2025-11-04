@@ -10,7 +10,13 @@ steps:
     goals: 'clean package'
     mavenPomFile: 'pom.xml'
 
+- script: |
+    echo "Listing build output files"
+    ls -R $(System.DefaultWorkingDirectory)
+  displayName: "Check build directory"
+
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'target/*.war'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/**/target/*.war'
     ArtifactName: 'warfile'
+    publishLocation: 'Container'
