@@ -1,0 +1,16 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Maven@3
+  inputs:
+    goals: 'clean package'
+    mavenPomFile: 'pom.xml'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'target/*.war'
+    ArtifactName: 'warfile'
