@@ -44,3 +44,9 @@ steps:
     echo "Testing application..."
     curl http://localhost:8080
   displayName: "Curl Test"
+- script: |
+    echo "Tomcat Logs:"
+    docker logs tomcat-app
+  displayName: "View Tomcat Logs"
+
+
