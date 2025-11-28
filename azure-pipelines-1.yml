@@ -39,3 +39,4 @@ steps:
       echo "Running Docker Container..."
       docker run -d -p 8080:8080 --name tomcat-app my-tomcat-app:latest
       echo "Application is running at http://localhost:8080/"
+      docker ps -a
