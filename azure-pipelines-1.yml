@@ -40,3 +40,7 @@ steps:
       docker run -d -p 8080:8080 --name tomcat-app my-tomcat-app:latest
       echo "Application is running at http://localhost:8080/"
       docker ps -a
+- script: |
+    echo "Testing application..."
+    curl http://localhost:8080
+  displayName: "Curl Test"
