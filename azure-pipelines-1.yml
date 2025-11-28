@@ -21,3 +21,21 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
     mavenOptions: '-Xmx1024m'
+# Build Docker Image
+- task: Bash@3
+  displayName: 'Build Docker Image with Tomcat and WAR'
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "Building Docker Image..."
+      docker build -t my-tomcat-app:latest .
+
+# Run Docker Container (for verification)
+- task: Bash@3
+  displayName: 'Run Docker Container'
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "Running Docker Container..."
+      docker run -d -p 8080:8080 --name tomcat-app my-tomcat-app:latest
+      echo "Application is running at http://localhost:8080/"
