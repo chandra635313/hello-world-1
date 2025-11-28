@@ -10,10 +10,22 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: Checkout@1
+  inputs:
+     clean: true
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean package'
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenOptions: '-Xmx3072m'
+
+- task: Bash@3
+  displayName: 'Build Docker Image'
+  inputs:
+    targetType: 'inline'
+    script: |
+      docker build -t mytomcatapp:latest .
