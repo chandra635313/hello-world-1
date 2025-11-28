@@ -10,22 +10,14 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Checkout@1
-  inputs:
-     clean: true
+- checkout: self
 
 - task: Maven@3
+  displayName: "Build Java Project using Maven"
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'clean package'
     publishJUnitResults: false
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
-    mavenOptions: '-Xmx3072m'
-
-- task: Bash@3
-  displayName: 'Build Docker Image'
-  inputs:
-    targetType: 'inline'
-    script: |
-      docker build -t mytomcatapp:latest .
+    mavenOptions: '-Xmx1024m'
