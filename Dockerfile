@@ -1,10 +1,5 @@
-FROM tomcat:9.0
- 
-RUN rm -rf /usr/local/tomcat/webapps/*
-
-# Copy WAR from multi-module location
-COPY webapp/target/*.war /usr/local/tomcat/webapps/ROOT.war
-
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY target/*.jar app.jar
 EXPOSE 8080
-
-CMD ["catalina.sh", "run"]
+ENTRYPOINT ["java","-jar","app.jar"]
