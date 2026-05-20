@@ -6,7 +6,6 @@ on:
       - master
   workflow_dispatch:
 
-
 jobs:
   scan:
     runs-on: ubuntu-latest
@@ -26,6 +25,16 @@ jobs:
       - name: Scan image
         continue-on-error: true
         run: snyk container test nginx:latest
+
+      - name: Generate JSON report
+        continue-on-error: true
+        run: snyk container test nginx:latest --json > snyk-report.json
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: snyk-report
+          path: snyk-report.json
 
       - name: Monitor
         run: snyk container monitor nginx:latest
