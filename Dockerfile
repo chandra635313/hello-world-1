@@ -1,5 +1,5 @@
 FROM tomcat:9.0
-
+ 
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy WAR from multi-module location
