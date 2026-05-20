@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - test
+      - master
   pull_request:
 
 jobs:
