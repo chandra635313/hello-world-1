@@ -2,7 +2,7 @@ name: Snyk Image Scan
 
 on:
   push:
-    branches:
+    branches: 
       - master
   workflow_dispatch:
 
